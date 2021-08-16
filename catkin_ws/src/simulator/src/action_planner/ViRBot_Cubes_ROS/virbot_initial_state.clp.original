@@ -18,12 +18,12 @@
 ; Objects definitions
 	( item (type Objects) (name deposit)(room bedroom)(image table)( attributes no-pick brown)(pose 6.183334 7.000000 0.0))
 	( item (type Objects) (name storage)(room livingroom)(image table)( attributes no-pick brown)(pose 3.183334 2.000000 0.0))
-	( item (type Objects) (name blockA)(room bedroom)(zone deposit)(image blockA)(attributes pick)(pose .46 1.12 0.0))
-	( item (type Objects) (name blockB)(room bedroom)(zone deposit)(image blockB)(attributes pick)(pose .32 1.12 0.0))
-	( item (type Objects) (name blockC)(room bedroom)(zone deposit)(image blockC)(attributes pick)(pose .18 1.12 0.0))
-	( item (type Objects) (name blockD)(room livingroom)(zone storage)(image blockD)(attributes pick)(pose .18 .97 0.0))
-	( item (type Objects) (name blockE)(room livingroom)(zone storage)(image blockE)(attributes pick)(pose .32 .97 0.0))
-	( item (type Objects) (name blockF)(room livingoom)(zone storage)(image blockF)(attributes pick)(pose .46 .97 0.0))
+	( item (type Objects) (name blockA)(room bedroom)(zone deposit)(image blockA)(attributes pick)(pose 0.2 0.1 0.0))
+	( item (type Objects) (name blockB)(room bedroom)(zone deposit)(image blockB)(attributes pick)(pose 0.3 0.1 0.0))
+	( item (type Objects) (name blockC)(room bedroom)(zone deposit)(image blockC)(attributes pick)(pose 0.1 0.1 0.0))
+	( item (type Objects) (name blockD)(room livingroom)(zone storage)(image blockD)(attributes pick)(pose 0.7 0.8 0.0))
+	( item (type Objects) (name blockE)(room livingroom)(zone storage)(image blockE)(attributes pick)(pose 0.6 0.8 0.0))
+	( item (type Objects) (name blockF)(room livingoom)(zone storage)(image blockF)(attributes pick)(pose 0.8 0.8 0.0))
 	( item (type Objects) (name freespace)(room any)(zone any)(image none)(attributes none)(pose 0.0 0.0 0.0))
 
 ; Rooms definitions
@@ -43,15 +43,19 @@
 	( Arm (name left))
 
 ;stacks definitions
-(stack corridor deposit blockC blockB blockA)
-(stack corridor storage blockD blockE blockF)
+        (stack bedroom deposit blockB blockA blockC)
+        (stack livingroom storage blockE blockD blockF)
 
-(real-stack corridor deposit blockC blockB blockA)
-(real-stack corridor storage blockD blockE blockF)
+        (real-stack bedroom deposit blockB blockA blockC)
+        (real-stack livingroom storage blockE blockD blockF)
 
-(goal-stack 1 kitchen deposit blockA blockB blockC)
-(goal-stack 2 studio storage blockF blockE blockD)
 
-(plan (name cubes) (number 0)(duration 0))
+	(goal-stack 1 bedroom deposit blockD blockA blockF)
+	(goal-stack 2 livingroom storage blockB blockE blockC)
+
+        (plan (name cubes) (number 0)(duration 0))
 
 )
+
+
+

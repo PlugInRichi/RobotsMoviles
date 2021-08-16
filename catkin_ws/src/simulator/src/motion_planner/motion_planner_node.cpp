@@ -54,6 +54,10 @@ int main(int argc ,char **argv)
     int flg_result;
     int flg_noise=0;
 
+    bool navegar = false;
+    float x_nP;
+    float y_np;
+
     float result;
     float final_x;
     float final_y;
@@ -324,11 +328,50 @@ int main(int argc ,char **argv)
 
             case 10:
 
-		action_planner(params.robot_x, params.robot_y,params.robot_theta,&movements);
+            if (navegar){
+              if(flagOnce){
+                for(i = 0; i < 200; i++)steps[i].node=-1;
+                user(params.robot_x ,params.robot_y ,params.light_x ,params.light_y ,params.world_name,steps);
+                printf("Los pasos a seguir para encontrar el grafo: \n");
+                print_algorithm_graph (steps);
+                i=0;
+                final_x=params.light_x;
+                final_y= params.light_y;
+                set_light_position(steps[i].x,steps[i].y);
+                printf("New Light %d: x = %f  y = %f \n",i,steps[i].x,steps[i].y);
+                flagOnce = 0;
+                flg_finish=0;
+                est_sig = 0;
+                movements.twist=0.0;
+                movements.advance =0.0;
+              }else{
+                printf("Turn_angle: %f robot theta: %f",params.robot_turn_angle, params.robot_theta);
+                flg_result=camposPotenciales(intensity,lidar_readings, params.laser_num_sensors, params.laser_value,
+                            &movements, params.light_x ,params.light_y, params.robot_x, params.robot_y,  params.robot_theta);
+                if(flg_result == 1){
+                    //Continua moviendote en el siguinte nodo, 1 indica que llegó.
+                    if(flg_finish == 1){
+                      stop();
+                      navegar = false;
+                    }else{
+                        if(steps[i].node != -1){
+                            set_light_position(steps[i].x,steps[i].y);
+                            printf("New Light %d: x = %f  y = %f \n",i,steps[i].x,steps[i].y);
+                            printf("Node %d\n",steps[i].node);
+                            i++;
+                        }else{
+                            set_light_position(final_x,final_y);
+                            printf("New Light %d: x = %f  y = %f \n",i,final_x,final_y);
+                            flg_finish=1;
+                        }
+                    }
+                }
+              }
+            }else{
+              navegar = action_planner(params.robot_x, params.robot_y,params.robot_theta,&movements,&x_nP,&y_np);
+            }
 
-                break;
-
-
+            break;
 
              default:
                     printf(" ******* SELECTION NO DEFINED *******\n");

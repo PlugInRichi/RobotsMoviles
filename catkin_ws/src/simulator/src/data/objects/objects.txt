@@ -1,6 +1,6 @@
-blockA .2 .1
-blockB .3 .1
-blockC .1 .1
-blockD .7 .8
-blockE .6 .8
-blockF .8 .8
+Appl .46 1.12
+Sush .32 1.12
+Milk .18 1.12
+Soap .18 .97
+Perf .32 .97
+Sham .46 .97

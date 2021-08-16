@@ -19,13 +19,13 @@
         =>
         (retract ?f)
         (printout t "ROS Starting action planner ROS")
-	(assert (action-planner active))
+	(assert (action-planner active));Es el primer hecho que se delcara al inicializar el action planer
 )
 
+;(action-planner active) ESTA BANDERA PERMITE QEU SE PUEDAN EJECUTAR LAS DEMÁS REGLAS
 
 
-
-(defrule secondary-goals 
+(defrule secondary-goals
 	(action-planner active)
         (goal-stack ?num ?room ?zone $? ?block1 ?block2 $?)
 	(not (final-stack ?num ?room ?zone $? ?block1 $?))
@@ -58,7 +58,7 @@
         (assert (plan (name ?name) (number (+ 6 ?num))(actions find-object freespace)(duration ?*plan_time*)) )
         (assert (plan (name ?name) (number (+ 7 ?num))(actions go freespace )(duration ?*plan_time*)) )
         (assert (plan (name ?name) (number (+ 8 ?num))(actions drop ?block1 )(duration ?*plan_time*)) )
-        ;(modify ?f1 (room ?room)(zone ?zone))	
+        ;(modify ?f1 (room ?room)(zone ?zone))
 	(assert (attempt (move ?block1)(room ?room)(zone ?zone)(on freespace)(number (+ 8 ?num) )))
 )
 
@@ -86,7 +86,7 @@
         (assert (plan (name ?name) (number (+ 6 ?num))(actions find-object ?block2)(duration ?*plan_time*)) )
         (assert (plan (name ?name) (number (+ 7 ?num))(actions go ?block2 )(duration ?*plan_time*)) )
         (assert (plan (name ?name) (number (+ 8 ?num))(actions drop ?block1 )(duration ?*plan_time*)) )
-        ;(modify ?f1 (room ?room)(zone ?zone))	
+        ;(modify ?f1 (room ?room)(zone ?zone))
         (assert (attempt (move ?block1)(room ?room)(zone ?zone)(on ?block2)(number (+ 8 ?num) )))
 )
 
@@ -153,11 +153,9 @@
 	(declare (salience 100))
 	(plan (name ?name) (number ?num) (status accomplished))
 	?f <- (attempt (move ?block1) (on ?block2) (room ?deposit) (zone ?zone) (number ?num)(status ?status&:(neq ?status finished)))
-	?f1 <- (item (type Objects) (name ?block1)) 
+	?f1 <- (item (type Objects) (name ?block1))
         =>
         (printout t ?block1 " was moved on " ?block2 "." crlf)
 	(modify ?f (room ?deposit) (zone ?zone)(status finished))
 	(modify ?f1 (room ?deposit) (zone ?zone))
 )
-
-
