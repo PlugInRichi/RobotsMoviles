@@ -331,7 +331,7 @@ int main(int argc ,char **argv)
             if (navegar){
               if(flagOnce){
                 for(i = 0; i < 200; i++)steps[i].node=-1;
-                user(params.robot_x ,params.robot_y ,params.light_x ,params.light_y ,params.world_name,steps);
+                user(params.robot_x ,params.robot_y, x_nP, y_np ,params.world_name,steps);
                 printf("Los pasos a seguir para encontrar el grafo: \n");
                 print_algorithm_graph (steps);
                 i=0;
@@ -359,16 +359,21 @@ int main(int argc ,char **argv)
                             printf("New Light %d: x = %f  y = %f \n",i,steps[i].x,steps[i].y);
                             printf("Node %d\n",steps[i].node);
                             i++;
-                        }else{
+                        }else{ //Es el último nodo, ya no hay más
                             set_light_position(final_x,final_y);
                             printf("New Light %d: x = %f  y = %f \n",i,final_x,final_y);
                             flg_finish=1;
+                            navegar = false;
+                            flagOnce = 1;
                         }
                     }
                 }
               }
             }else{
               navegar = action_planner(params.robot_x, params.robot_y,params.robot_theta,&movements,&x_nP,&y_np);
+              printf("\n\n\nNueva acción de CLIPS: %d, posición dada: %f,  %f \n\n", navegar,x_nP,y_np);
+              final_x=params.light_x;
+              final_y= params.light_y;
             }
 
             break;

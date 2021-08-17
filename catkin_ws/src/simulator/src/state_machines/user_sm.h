@@ -62,7 +62,7 @@ int user(float rx, float ry, float lx, float ly, char *world_name, step *steps){
 			 goal = i;
 	}
 	printf("Nodo inicial %d y nodo final %d\n", start, goal);
-	BFS_algorithm(goal ,start);
+	A_star_algorithm(goal ,start);
 
 	padre = start;
 	printf("\n\nindice: %d, contenido:\n", padre);
