@@ -19,12 +19,12 @@
 	( item (type Objects) (name fridge)(room kitchen)(image table)( attributes no-pick brown)(pose 6.183334 7.000000 0.0))
 	( item (type Objects) (name storage)(room service)(image table)( attributes no-pick brown)(pose 3.183334 2.000000 0.0))
 	( item (type Objects) (name deposit)(room corridor)(image table)( attributes no-pick brown)(pose 3.183334 2.000000 0.0))
-	( item (type Objects) (name blockA)(room corridor)(zone deposit)(image blockA)(attributes pick)(pose .46 1.12 0.0))
-	( item (type Objects) (name blockB)(room corridor)(zone deposit)(image blockB)(attributes pick)(pose .32 1.12 0.0))
-	( item (type Objects) (name blockC)(room corridor)(zone deposit)(image blockC)(attributes pick)(pose .18 1.12 0.0))
-	( item (type Objects) (name blockD)(room corridor)(zone deposit)(image blockD)(attributes pick)(pose .18 .97 0.0))
-	( item (type Objects) (name blockE)(room corridor)(zone deposit)(image blockE)(attributes pick)(pose .32 .97 0.0))
-	( item (type Objects) (name blockF)(room corridor)(zone deposit)(image blockF)(attributes pick)(pose .46 .97 0.0))
+	( item (type Objects) (name Appl)(room corridor)(zone deposit)(image Appl)(attributes pick)(pose .46 1.12 0.0))
+	( item (type Objects) (name Sush)(room corridor)(zone deposit)(image Sush)(attributes pick)(pose .32 1.12 0.0))
+	( item (type Objects) (name Milk)(room corridor)(zone deposit)(image Milk)(attributes pick)(pose .18 1.12 0.0))
+	( item (type Objects) (name Soap)(room corridor)(zone deposit)(image Soap)(attributes pick)(pose .18 .97 0.0))
+	( item (type Objects) (name Perf)(room corridor)(zone deposit)(image Perf)(attributes pick)(pose .32 .97 0.0))
+	( item (type Objects) (name Sham)(room corridor)(zone deposit)(image Sham)(attributes pick)(pose .46 .97 0.0))
 	( item (type Objects) (name freespace)(room any)(zone any)(image none)(attributes none)(pose 0.0 0.0 0.0))
 
 ; Rooms definitions
@@ -44,14 +44,14 @@
 	( Arm (name left))
 
 ;stacks definitions
-(stack corridor deposit blockA blockB blockC)
-(stack corridor deposit blockF blockE blockD)
+(stack corridor deposit Appl Sush Milk)
+(stack corridor deposit Sham Perf Soap)
 
-(real-stack corridor deposit blockA blockB blockC)
-(real-stack corridor deposit blockF blockE blockD)
+(real-stack corridor deposit Appl Sush Milk)
+(real-stack corridor deposit Sham Perf Soap)
 
-(goal-stack 1 kitchen fridge blockC blockB blockA)
-(goal-stack 2 service storage blockD blockE blockF)
+(goal-stack 1 kitchen fridge Milk Sush Appl)
+(goal-stack 2 service storage Soap Perf Sham)
 
 (plan (name cubes) (number 0)(duration 0))
 
